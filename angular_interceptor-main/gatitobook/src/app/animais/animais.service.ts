@@ -3,8 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Animais } from './animais';
+import { environment } from 'src/environments/environment';
 //essa constante de API deve ser criada fora do decorator e da classe
-const API = 'http://localhost:3000';
+const API = environment.apiURL;
 
 @Injectable({
   providedIn: 'root'
