@@ -18,6 +18,7 @@ export class AnimaisService {
     const token = this.TokenService.retornaToken();
     const headers = new HttpHeaders().append('x-access-token',token);
 
+    //fazendo get passando o token que o backend exige no headers
     return this.http.get<Animais>(`${API}/${nomeDoUsuario}/photos`, {headers});
   }
 }

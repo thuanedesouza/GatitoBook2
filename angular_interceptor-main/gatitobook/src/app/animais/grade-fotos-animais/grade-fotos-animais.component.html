@@ -2,7 +2,7 @@
 <div class="row">
   <!--Usando ngIf para criar a diretiva do loop dos cartões -->
   <div
-  *ngIf="let animal of animais"
+  *ngFor="let animal of animais"
   class= "col-4">
   <a [routerLink]="['/animais', animal.id]"></a>
   <app-cartao>
