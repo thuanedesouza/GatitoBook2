@@ -4,8 +4,10 @@
 <div class="row">
   <!--Usando ngIf para criar a diretiva do loop dos cartões -->
   <div *ngFor="let animal of animais" class="col-4">
-    <a [routerLink]="['/animais', animal.id]"></a>
-    <app-cartao>
+
+    <a [routerLink]="['/animais', animal.id]">
+    <!-- Todo o cartão vai se tornar um link -->
+      <app-cartao>
       <app-animal [url]="animal.url" [descricao]="animal.description">
       </app-animal>
       <div class="text-center p-1">
@@ -17,5 +19,7 @@
         }}</i>
       </div>
     </app-cartao>
+    </a>
+
   </div>
 </div>

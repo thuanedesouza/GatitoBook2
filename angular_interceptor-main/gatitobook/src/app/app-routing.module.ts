@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { DetalheAnimalComponent } from './animais/detalhe-animal/detalhe-animal.component';
 import { AutenticacaoGuard } from './autenticacao/autenticacao.guard';
 import { LoginGuard } from './autenticacao/login.guard';
 
@@ -20,6 +21,10 @@ const routes: Routes = [
       import('./animais/animais.module').then((m) => m.AnimaisModule),
       canLoad:[AutenticacaoGuard]
   },
+  {
+    path: ':animalId',
+    component: DetalheAnimalComponent
+  }
 ];
 
 @NgModule({

@@ -2,7 +2,7 @@ import { TokenService } from './../autenticacao/token.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Animais } from './animais';
+import { Animais, Animal } from './animais';
 import { environment } from 'src/environments/environment';
 //essa constante de API deve ser criada fora do decorator e da classe
 const API = environment.apiURL;
@@ -20,5 +20,12 @@ export class AnimaisService {
 
     //fazendo get passando o token que o backend exige no headers
     return this.http.get<Animais>(`${API}/${nomeDoUsuario}/photos`, {headers});
+  }
+
+
+  buscaPorID(id:number):Observable<Animal>{
+    const token = this.TokenService.retornaToken();
+    const headers = new HttpHeaders().append('x-access-token', token);
+    return this.http.get<Animal> (`${API}/photos/${id}`, {headers});
   }
 }
