@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { Animal } from './../animais';
 import { Component, OnInit } from '@angular/core';
 import { AnimaisService } from '../animais.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-detalhe-animal',
@@ -15,12 +15,30 @@ export class DetalheAnimalComponent implements OnInit {
 
   constructor(
     private animaisService: AnimaisService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {}
   //activatedRoute é um serviço do framework para pegar o id que vem da rota, já que esse componente é dinamico
 
   ngOnInit(): void {
     this.animalId = this.activatedRoute.snapshot.params.animalId;
     this.animal$ = this.animaisService.buscaPorID(this.animalId);
+  }
+
+  curtir() {
+    this.animaisService.curtir(this.animalId).subscribe((curtida) => {
+      if (curtida) {
+        this.animal$ = this.animaisService.buscaPorID(this.animalId);
+      }
+    });
+  }
+
+  excluir() {
+    this.animaisService.excluiAnimal(this.animalId).subscribe(
+      () => {
+        this.router.navigate(['/animais/']);
+      },
+      (error) => console.log(error)
+    );
   }
 }
